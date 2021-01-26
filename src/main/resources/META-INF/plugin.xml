@@ -1,19 +1,40 @@
 <idea-plugin>
-    <id>com.github.linuxchina.workspaces</id>
+    <id>Workspaces</id>
     <name>Workspaces</name>
-    <vendor>linux-china</vendor>
+    <vendor url="http://www.chrisbartley.com/" email="chris@chrisbartley.com">Chris Bartley</vendor>
+    <version>0.14</version>
+
+    <description><![CDATA[
+         This plugin enables you to create and manage named groups of files, or "workspaces", within a
+         project. You can bind a name to a set of one or more files and then open/close that set of
+         files as a group. You can create as many workspaces as you want and arrange them in the
+         Workspaces tool window in any order you like.
+      ]]></description>
+
+    <change-notes><![CDATA[
+         * Migrated to JetBrains platform 2020.x
+      ]]></change-notes>
 
     <!-- Product and plugin compatibility requirements -->
     <!-- https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="com.github.linuxchina.workspaces.services.MyApplicationService"/>
-        <projectService serviceImplementation="com.github.linuxchina.workspaces.services.MyProjectService"/>
     </extensions>
 
-    <applicationListeners>
-        <listener class="com.github.linuxchina.workspaces.listeners.MyProjectManagerListener"
-                  topic="com.intellij.openapi.project.ProjectManagerListener"/>
-    </applicationListeners>
+    <application-components>
+        <component>
+            <implementation-class>com.chrisbartley.idea.workspaces.WorkspacesConfiguration</implementation-class>
+        </component>
+        <component>
+            <implementation-class>com.chrisbartley.idea.workspaces.WorkspacesConfigurable</implementation-class>
+        </component>
+    </application-components>
+
+    <project-components>
+        <component>
+            <implementation-class>com.chrisbartley.idea.workspaces.WorkspaceManager</implementation-class>
+            <option name="workspace" value="true"/>
+        </component>
+    </project-components>
 </idea-plugin>
