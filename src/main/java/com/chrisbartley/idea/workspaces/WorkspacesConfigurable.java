@@ -60,20 +60,20 @@
 /*     */ 
 /*     */   
 /*     */   public void initComponent() {
-/*  63 */     this.workspacesConfiguration = (WorkspacesConfiguration)ApplicationManager.getApplication().getComponent(WorkspacesConfiguration.class);
+/*  63 */     this.workspacesConfiguration = ApplicationManager.getApplication().getComponent(WorkspacesConfiguration.class);
 /*     */ 
 /*     */     
-/*  66 */     this.workspacesMenu.add((AnAction)this.toggleWorkspaceOpennessActionGroup);
+/*  66 */     this.workspacesMenu.add(this.toggleWorkspaceOpennessActionGroup);
 /*  67 */     this.workspacesMenu.addSeparator();
-/*  68 */     this.workspacesMenu.add((AnAction)this.closeAllWorkspacesExceptThisActionGroup);
-/*  69 */     this.workspacesMenu.add((AnAction)this.closeAllWorkspacesAction);
-/*  70 */     this.workspacesMenu.add((AnAction)this.closeAllNonWorkspaceFilesAction);
+/*  68 */     this.workspacesMenu.add(this.closeAllWorkspacesExceptThisActionGroup);
+/*  69 */     this.workspacesMenu.add(this.closeAllWorkspacesAction);
+/*  70 */     this.workspacesMenu.add(this.closeAllNonWorkspaceFilesAction);
 /*  71 */     this.workspacesMenu.addSeparator();
-/*  72 */     this.workspacesMenu.add((AnAction)this.togglePinActionGroup);
-/*  73 */     this.workspacesMenu.add((AnAction)this.configureActionGroup);
+/*  72 */     this.workspacesMenu.add(this.togglePinActionGroup);
+/*  73 */     this.workspacesMenu.add(this.configureActionGroup);
 /*  74 */     this.workspacesMenu.addSeparator();
-/*  75 */     this.workspacesMenu.add((AnAction)this.removeActionGroup);
-/*  76 */     this.workspacesMenu.add((AnAction)this.createWorkspaceAction);
+/*  75 */     this.workspacesMenu.add(this.removeActionGroup);
+/*  76 */     this.workspacesMenu.add(this.createWorkspaceAction);
 /*     */ 
 /*     */     
 /*  79 */     this.createWorkspaceAction.register();
