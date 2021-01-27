@@ -138,7 +138,7 @@
 /*     */   private void unregisterToolWindow(ToolWindowManager toolWindowManager) {
 /* 139 */     if (toolWindowManager.getToolWindow("Workspaces") != null)
 /*     */     {
-/* 141 */       toolWindowManager.unregisterToolWindow("Workspaces");
+/* 141 */       //toolWindowManager.unregisterToolWindow("Workspaces");
 /*     */     }
 /*     */   }
 /*     */ 
