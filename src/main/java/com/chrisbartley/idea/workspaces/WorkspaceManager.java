@@ -245,7 +245,6 @@ public final class WorkspaceManager {
 
     public void closeWorkspaces(Set<Workspace> workspacesToClose) {
         if (workspacesToClose != null && !workspacesToClose.isEmpty()) {
-
             FileEditorManager fileEditorManager = FileEditorManager.getInstance(this.project);
             Set<String> urlsNotToBeClosed = getUrlsNotToBeClosed(workspacesToClose);
             for (Workspace workspace : workspacesToClose) {
@@ -254,6 +253,9 @@ public final class WorkspaceManager {
         }
     }
 
+    public void closeWorkspaces(List<Workspace> workspacesToClose) {
+        closeWorkspaces(new HashSet<>(workspacesToClose));
+    }
 
     public void closeAllWorkspaces() {
         FileEditorManager fileEditorManager = FileEditorManager.getInstance(this.project);
