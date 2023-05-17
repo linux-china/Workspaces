@@ -10,14 +10,13 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import org.jetbrains.annotations.NotNull;
 
-import javax.swing.*;
 import java.util.Set;
 
 
 public final class CreateWorkspaceAction
         extends BaseWorkspaceAction {
     public CreateWorkspaceAction() {
-        super("Create New from Open File(s)...", "Create a new workspace from some or all of the currently open files", (Icon) null);
+        super("Create New from Open File(s)...", "Create a new workspace from some or all of the currently open files", Icons.ADD_WORKSPACE);
     }
 
 
@@ -44,8 +43,6 @@ public final class CreateWorkspaceAction
         if (project != null) {
             String text, description;
             VirtualFile[] openFiles = FileEditorManager.getInstance(project).getOpenFiles();
-
-
             switch (openFiles.length) {
 
 
@@ -69,9 +66,8 @@ public final class CreateWorkspaceAction
 
             presentation.setText(text);
             presentation.setDescription(description);
-            presentation.setEnabled((openFiles != null && openFiles.length > 0));
+            presentation.setEnabled(openFiles.length > 0);
         } else {
-
             presentation.setText("Create New from Open File(s)...");
             presentation.setDescription("Create a new workspace from some or all of the currently open files");
             presentation.setEnabled(false);
