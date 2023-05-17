@@ -27,8 +27,8 @@ public class WorkspaceStateService implements PersistentStateComponent<Workspace
     }
 
     private State myState = new State();
-    private ReorderableListModel workspacesModel;
-    JBList<WorkspaceState> workspaceList;
+    private ReorderableListModel<Workspace> workspacesModel;
+    JBList<Workspace> workspaceJBList;
 
     public @NotNull State getState() {
         return myState;
@@ -38,20 +38,20 @@ public class WorkspaceStateService implements PersistentStateComponent<Workspace
         myState = state;
     }
 
-    public @NotNull ReorderableListModel getWorkspacesModel() {
+    public @NotNull ReorderableListModel<Workspace> getWorkspacesModel() {
         if (workspacesModel == null) {
-            workspacesModel = new ReorderableListModel(myState.workspaces);
+            workspacesModel = new ReorderableListModel<>(myState.workspaces);
         }
         return workspacesModel;
     }
 
-    public @NotNull JBList<WorkspaceState> getWorkspaceList(Project project) {
-        if (workspaceList == null) {
-            workspaceList = new JBList<>();
-            workspaceList.setModel(getWorkspacesModel());
-            workspaceList.setSelectionMode(2);
-            workspaceList.setCellRenderer(new WorkspacesToolWindowListCellRenderer(project));
+    public @NotNull JBList<Workspace> getWorkspaceJBList(Project project) {
+        if (workspaceJBList == null) {
+            workspaceJBList = new JBList<>();
+            workspaceJBList.setModel(getWorkspacesModel());
+            workspaceJBList.setSelectionMode(2);
+            workspaceJBList.setCellRenderer(new WorkspacesToolWindowListCellRenderer(project));
         }
-        return workspaceList;
+        return workspaceJBList;
     }
 }
