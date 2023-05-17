@@ -16,8 +16,6 @@ public class ReorderableListModel<T> extends WrappedListModel<T> {
             int lastIndexToShift = indicesToShift[indicesToShift.length - 1];
             assertIndexIsWithinBounds(firstIndexToShift);
             assertIndexIsWithinBounds(lastIndexToShift);
-
-
             if ((isShiftTowardsEndOfList && lastIndexToShift < size() - 1) || (!isShiftTowardsEndOfList && firstIndexToShift > 0)) {
                 boolean[] elementsWillBeShifted = new boolean[size()];
                 for (int j : indicesToShift) {
