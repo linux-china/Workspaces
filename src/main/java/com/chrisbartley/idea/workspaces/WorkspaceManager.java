@@ -351,6 +351,14 @@ public final class WorkspaceManager {
         return actions;
     }
 
+    public List<RegisterableAction> getAppendWorkspaceActions() {
+        List<RegisterableAction> actions = new ArrayList<>();
+        for (Workspace workspace : this.workspacesModel) {
+            actions.add(new AppendFileToWorkspaceAction(workspace));
+        }
+        return actions;
+    }
+
 
     public int indexOf(Workspace workspace) {
         if (workspace != null) {
