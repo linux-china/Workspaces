@@ -1,19 +1,12 @@
-/*    */ package com.chrisbartley.idea.util;
-/*    */ 
-/*    */ import javax.swing.Icon;
-/*    */ import javax.swing.ImageIcon;
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ public final class Icons
-/*    */ {
-/* 11 */   public static final Icon MOVE_DOWN = new ImageIcon(Icons.class.getResource("/actions/moveDown.png"));
-/* 12 */   public static final Icon MOVE_UP = new ImageIcon(Icons.class.getResource("/actions/moveUp.png"));
-/*    */ }
+package com.chrisbartley.idea.util;
 
+import com.intellij.openapi.util.IconLoader;
 
-/* Location:              /Users/linux_china/Downloads/Workspaces_293.jar!/com/chrisbartley/idea/util/Icons.class
- * Java compiler version: 2 (46.0)
- * JD-Core Version:       1.1.3
- */
+import javax.swing.*;
+
+public final class Icons {
+    public static final Icon MOVE_DOWN = IconLoader.getIcon("/actions/moveDown.png", Icons.class);
+    public static final Icon MOVE_UP = IconLoader.getIcon("/actions/moveUp.png", Icons.class);
+
+}
+
