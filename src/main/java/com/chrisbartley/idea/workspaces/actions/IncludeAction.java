@@ -12,12 +12,12 @@ import javax.swing.*;
 
 final class IncludeAction extends AnAction {
     private final JList<IncludableItem<String>> jList;
-    private final RefreshableListModel listModel;
+    private final RefreshableListModel<IncludableItem<String>> listModel;
 
     public IncludeAction(JList<IncludableItem<String>> jList) {
         super("Include", "Include the selected files(s)", Icons.INCLUDE_WORKSPACE_ITEM);
         this.jList = jList;
-        this.listModel = (RefreshableListModel) jList.getModel();
+        this.listModel = (RefreshableListModel<IncludableItem<String>>) jList.getModel();
     }
 
 
