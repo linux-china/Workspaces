@@ -34,17 +34,12 @@ public final class CloseAllWorkspacesExceptThisAction extends BaseWorkspaceActio
         Project project = getProject(event);
         if (project != null) {
             if (this.jList != null) {
-
                 if (!this.jList.getSelectionModel().isSelectionEmpty()) {
                     getWorkspaceManager(project).closeAllButTheseWorkspaces(this.jList.getSelectedValuesList());
-
-
-                    RefreshableListModel model = (RefreshableListModel) this.jList.getModel();
+                    RefreshableListModel<Workspace> model = (RefreshableListModel<Workspace>) this.jList.getModel();
                     model.refreshAllButThese(this.jList.getSelectedIndices());
                 }
-
             } else {
-
                 getWorkspaceManager(project).closeAllButThisWorkspace(this.workspace);
             }
         }
