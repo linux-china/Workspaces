@@ -1,12 +1,12 @@
 package com.chrisbartley.idea.util;
 
-import com.intellij.openapi.util.IconLoader;
+import com.intellij.icons.AllIcons;
 
 import javax.swing.*;
 
 public final class Icons {
-    public static final Icon MOVE_DOWN = IconLoader.getIcon("/actions/moveDown.png", Icons.class);
-    public static final Icon MOVE_UP = IconLoader.getIcon("/actions/moveUp.png", Icons.class);
+    public static final Icon MOVE_DOWN = AllIcons.Actions.MoveUp;
+    public static final Icon MOVE_UP = AllIcons.Actions.MoveDown;
 
 }
 
