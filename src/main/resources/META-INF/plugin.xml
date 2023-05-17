@@ -1,5 +1,5 @@
 <idea-plugin>
-    <id>Workspaces</id>
+    <id>Workspaces2</id>
     <name>Workspaces</name>
     <vendor url="https://github.com/linux-china" email="libing.chen@gmail.com">linux_china</vendor>
     <version>0.14</version>
