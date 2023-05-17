@@ -1,75 +1,64 @@
-/*    */ package com.chrisbartley.idea.workspaces.actions;
-/*    */ 
-/*    */ import com.chrisbartley.idea.util.VirtualFileUtils;
-/*    */ import com.intellij.openapi.actionSystem.AnActionEvent;
-/*    */ import com.intellij.openapi.fileEditor.FileEditorManager;
-/*    */ import com.intellij.openapi.project.Project;
-/*    */ import com.intellij.openapi.vfs.VirtualFile;
-/*    */ import java.util.HashSet;
-/*    */ import java.util.Iterator;
-/*    */ import java.util.Set;
-/*    */ import javax.swing.Icon;
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ public final class CloseAllNonWorkspaceFilesAction
-/*    */   extends BaseWorkspaceAction
-/*    */ {
-/*    */   public CloseAllNonWorkspaceFilesAction() {
-/* 19 */     super("Close All Non-Workspace Files", "Close all files which are not bound to a workspace", (Icon)null);
-/*    */   }
-/*    */ 
-/*    */   
-/*    */   public void actionPerformed(AnActionEvent event) {
-/* 24 */     Project project = getProject(event);
-/* 25 */     if (project != null) {
-/*    */       
-/* 27 */       FileEditorManager fileEditorManager = FileEditorManager.getInstance(project);
-/* 28 */       VirtualFile[] openFiles = fileEditorManager.getOpenFiles();
-/* 29 */       if (openFiles.length > 0) {
-/*    */         
-/* 31 */         Set openNonWorkspacedUrls = getOpenNonWorkspacedUrls(project, openFiles);
-/* 32 */         for (Iterator iterator = openNonWorkspacedUrls.iterator(); iterator.hasNext(); ) {
-/*    */           
-/* 34 */           String url =(String) iterator.next();
-/* 35 */           VirtualFileUtils.closeFileByUrl(fileEditorManager, url);
-/*    */         } 
-/*    */       } 
-/*    */     } 
-/*    */   }
-/*    */ 
-/*    */   
-/*    */   public void update(AnActionEvent event) {
-/* 43 */     Project project = getProject(event);
-/* 44 */     if (project != null) {
-/*    */       
-/* 46 */       VirtualFile[] openFiles = FileEditorManager.getInstance(project).getOpenFiles();
-/* 47 */       if (openFiles.length > 0)
-/*    */       {
-/* 49 */         Set openNonWorkspacedUrls = getOpenNonWorkspacedUrls(project, openFiles);
-/* 50 */         event.getPresentation().setEnabled((openNonWorkspacedUrls.size() > 0));
-/*    */       }
-/*    */       else
-/*    */       {
-/* 54 */         event.getPresentation().setEnabled(false);
-/*    */       }
-/*    */     
-/*    */     } else {
-/*    */       
-/* 59 */       event.getPresentation().setEnabled(false);
-/*    */     } 
-/*    */   }
-/*    */ 
-/*    */   
-/*    */   private Set getOpenNonWorkspacedUrls(Project project, VirtualFile[] openFiles) {
-/* 65 */     Set openUrls = new HashSet(VirtualFileUtils.getUrls(openFiles));
-/* 66 */     openUrls.removeAll(getWorkspaceManager(project).getBoundFileUrls());
-/* 67 */     return openUrls;
-/*    */   }
-/*    */ }
+package com.chrisbartley.idea.workspaces.actions;
+
+import com.chrisbartley.idea.util.VirtualFileUtils;
+import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.fileEditor.FileEditorManager;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vfs.VirtualFile;
+import org.jetbrains.annotations.NotNull;
+
+import javax.swing.*;
+import java.util.HashSet;
+import java.util.Set;
+
+public final class CloseAllNonWorkspaceFilesAction
+        extends BaseWorkspaceAction {
+    public CloseAllNonWorkspaceFilesAction() {
+        super("Close All Non-Workspace Files", "Close all files which are not bound to a workspace", (Icon) null);
+    }
 
 
-/* Location:              /Users/linux_china/Downloads/Workspaces_293.jar!/com/chrisbartley/idea/workspaces/actions/CloseAllNonWorkspaceFilesAction.class
- * Java compiler version: 2 (46.0)
- * JD-Core Version:       1.1.3
- */
+    public void actionPerformed(@NotNull AnActionEvent event) {
+        Project project = getProject(event);
+        if (project != null) {
+
+            FileEditorManager fileEditorManager = FileEditorManager.getInstance(project);
+            VirtualFile[] openFiles = fileEditorManager.getOpenFiles();
+            if (openFiles.length > 0) {
+
+                Set<String> openNonWorkspacedUrls = getOpenNonWorkspacedUrls(project, openFiles);
+                for (String url : openNonWorkspacedUrls) {
+
+                    VirtualFileUtils.closeFileByUrl(fileEditorManager, url);
+                }
+            }
+        }
+    }
+
+
+    public void update(@NotNull AnActionEvent event) {
+        Project project = getProject(event);
+        if (project != null) {
+
+            VirtualFile[] openFiles = FileEditorManager.getInstance(project).getOpenFiles();
+            if (openFiles.length > 0) {
+                Set<String> openNonWorkspacedUrls = getOpenNonWorkspacedUrls(project, openFiles);
+                event.getPresentation().setEnabled((!openNonWorkspacedUrls.isEmpty()));
+            } else {
+                event.getPresentation().setEnabled(false);
+            }
+
+        } else {
+
+            event.getPresentation().setEnabled(false);
+        }
+    }
+
+
+    private Set<String> getOpenNonWorkspacedUrls(Project project, VirtualFile[] openFiles) {
+        Set<String> openUrls = new HashSet<>(VirtualFileUtils.getUrls(openFiles));
+        openUrls.removeAll(getWorkspaceManager(project).getBoundFileUrls());
+        return openUrls;
+    }
+}
+
