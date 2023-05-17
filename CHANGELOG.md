@@ -8,6 +8,10 @@
 
 ### Added
 
+- Append current file to workspace by right click file tab.
+
+### Changed
+
 - Adopt IntelliJ Platform Plugin Template to build project
 - Restructure project with project service, toolwindow, applicationConfigurable components
 - Compatible with IntelliJ IDEA 2023.*
