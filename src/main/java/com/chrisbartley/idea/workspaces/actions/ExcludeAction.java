@@ -13,12 +13,12 @@ import java.util.List;
 
 final class ExcludeAction extends AnAction {
     private final JList<IncludableItem<String>> jList;
-    private final RefreshableListModel listModel;
+    private final RefreshableListModel<IncludableItem<String>> listModel;
 
     public ExcludeAction(JList<IncludableItem<String>> jList) {
         super("Exclude", "Exclude the selected files(s)", Icons.EXCLUDE_WORKSPACE_ITEM);
         this.jList = jList;
-        this.listModel = (RefreshableListModel) jList.getModel();
+        this.listModel = (RefreshableListModel<IncludableItem<String>>) jList.getModel();
     }
 
 
