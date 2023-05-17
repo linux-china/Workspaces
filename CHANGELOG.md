@@ -9,6 +9,7 @@
 ### Added
 
 - Append current file to workspace by right click file tab.
+- Append current file to workspace by right click file in project view.
 
 ### Changed
 
