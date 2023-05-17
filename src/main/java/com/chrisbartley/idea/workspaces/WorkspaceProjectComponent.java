@@ -2,10 +2,7 @@ package com.chrisbartley.idea.workspaces;
 
 import com.chrisbartley.idea.actions.MutableActionGroup;
 import com.chrisbartley.idea.actions.RegisterableAction;
-import com.chrisbartley.idea.workspaces.actions.CloseAllNonWorkspaceFilesAction;
-import com.chrisbartley.idea.workspaces.actions.CloseAllWorkspacesAction;
-import com.chrisbartley.idea.workspaces.actions.CreateWorkspaceAction;
-import com.chrisbartley.idea.workspaces.actions.WorkspaceMutableActionGroupStrategy;
+import com.chrisbartley.idea.workspaces.actions.*;
 import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.ProjectComponent;
@@ -28,6 +25,11 @@ public class WorkspaceProjectComponent implements ProjectComponent {
 
     private final RegisterableAction closeAllWorkspacesAction = new CloseAllWorkspacesAction();
     private final RegisterableAction closeAllNonWorkspaceFilesAction = new CloseAllNonWorkspaceFilesAction();
+
+    private final MutableActionGroup appendToWorkspaceActionGroup = new MutableActionGroup(new AppendFileToWorkspaceActionGroup(), "Append", false);
+    private final DefaultActionGroup appendToWorkspaceMenu = new AppendActionGroup();
+
+
     private final Project project;
 
     public WorkspaceProjectComponent(Project project) {
@@ -61,6 +63,8 @@ public class WorkspaceProjectComponent implements ProjectComponent {
         if (workspacesConfiguration.getState().isDisplayToolWindowUI()) {
             showHideToolWindow();
         }
+
+        registerAppendFileMenu();
     }
 
     @Override
@@ -83,6 +87,12 @@ public class WorkspaceProjectComponent implements ProjectComponent {
         mainMenu.add(this.workspacesMenu, WORKSPACES_MENU_PLACEMENT);
     }
 
+    private void registerAppendFileMenu() {
+        DefaultActionGroup editorTabPopupMenu = (DefaultActionGroup) ActionManager.getInstance().getAction("EditorTabPopupMenu");
+        appendToWorkspaceMenu.add(this.appendToWorkspaceActionGroup);
+        editorTabPopupMenu.remove(this.appendToWorkspaceMenu);
+        editorTabPopupMenu.add(this.appendToWorkspaceMenu);
+    }
 
     private void showHideToolWindow() {
         var toolWindow = ToolWindowManager.getInstance(project).getToolWindow("Workspaces");
@@ -90,7 +100,6 @@ public class WorkspaceProjectComponent implements ProjectComponent {
             toolWindow.show();
         }
     }
-
 
     public RegisterableAction getCloseAllWorkspacesAction() {
         return this.closeAllWorkspacesAction;
@@ -143,6 +152,18 @@ public class WorkspaceProjectComponent implements ProjectComponent {
 
         public List<RegisterableAction> getActions(AnActionEvent event) {
             return getWorkspaceManager(event).getRemoveWorkspaceActions();
+        }
+    }
+
+    /**
+     * append file to workspace action group: list all workspaces
+     */
+    private static final class AppendFileToWorkspaceActionGroup extends WorkspaceMutableActionGroupStrategy {
+        private AppendFileToWorkspaceActionGroup() {
+        }
+
+        public List<RegisterableAction> getActions(AnActionEvent event) {
+            return getWorkspaceManager(event).getAppendWorkspaceActions();
         }
     }
 }
