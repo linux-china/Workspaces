@@ -13,6 +13,10 @@ public final class VirtualFileUtils {
         return getUrls(Arrays.asList(virtualFiles));
     }
 
+    public static String getUrl(VirtualFile virtualFile) {
+        return virtualFile.getUrl();
+    }
+
 
     public static List<String> getUrls(List<VirtualFile> virtualFiles) {
         List<String> urls = new ArrayList<>();
