@@ -4,11 +4,10 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.project.Project;
 import org.jetbrains.annotations.NotNull;
 
-import javax.swing.Icon;
+import javax.swing.*;
 
 
-public final class CloseAllWorkspacesAction
-        extends BaseWorkspaceAction {
+public final class CloseAllWorkspacesAction extends BaseWorkspaceAction {
     public CloseAllWorkspacesAction() {
         super("Close All Workspaces", "Close all workspaces", (Icon) null);
     }

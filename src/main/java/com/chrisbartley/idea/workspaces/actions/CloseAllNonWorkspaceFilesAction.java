@@ -11,8 +11,7 @@ import javax.swing.*;
 import java.util.HashSet;
 import java.util.Set;
 
-public final class CloseAllNonWorkspaceFilesAction
-        extends BaseWorkspaceAction {
+public final class CloseAllNonWorkspaceFilesAction extends BaseWorkspaceAction {
     public CloseAllNonWorkspaceFilesAction() {
         super("Close All Non-Workspace Files", "Close all files which are not bound to a workspace", (Icon) null);
     }
