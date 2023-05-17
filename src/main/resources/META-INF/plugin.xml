@@ -1,40 +1,29 @@
 <idea-plugin>
     <id>Workspaces</id>
     <name>Workspaces</name>
-    <vendor url="http://www.chrisbartley.com/" email="chris@chrisbartley.com">Chris Bartley</vendor>
+    <vendor url="https://github.com/linux-china" email="libing.chen@gmail.com">linux_china</vendor>
     <version>0.14</version>
-
-    <description><![CDATA[
-         This plugin enables you to create and manage named groups of files, or "workspaces", within a
-         project. You can bind a name to a set of one or more files and then open/close that set of
-         files as a group. You can create as many workspaces as you want and arrange them in the
-         Workspaces tool window in any order you like.
-      ]]></description>
-
-    <change-notes><![CDATA[
-         * Migrated to JetBrains platform 2020.x
-      ]]></change-notes>
 
     <!-- Product and plugin compatibility requirements -->
     <!-- https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
+        <applicationService serviceImplementation="com.chrisbartley.idea.workspaces.WorkspacesConfiguration"/>
+        <projectService serviceImplementation="com.chrisbartley.idea.workspaces.WorkspaceStateService"/>
+        <applicationConfigurable
+                parentId="tools"
+                instance="com.chrisbartley.idea.workspaces.WorkspacesConfigurable"
+                id="com.chrisbartley.idea.workspaces.WorkspacesConfigurable"
+                displayName="Workspaces"/>
+        <toolWindow id="Workspaces" icon="/com/chrisbartley/idea/workspaces/icons/workspace.png" anchor="left"
+                    factoryClass="com.chrisbartley.idea.workspaces.WorkspaceToolWindowFactory"/>
     </extensions>
-
-    <application-components>
-        <component>
-            <implementation-class>com.chrisbartley.idea.workspaces.WorkspacesConfiguration</implementation-class>
-        </component>
-        <component>
-            <implementation-class>com.chrisbartley.idea.workspaces.WorkspacesConfigurable</implementation-class>
-        </component>
-    </application-components>
 
     <project-components>
         <component>
-            <implementation-class>com.chrisbartley.idea.workspaces.WorkspaceManager</implementation-class>
-            <option name="workspace" value="true"/>
+            <implementation-class>com.chrisbartley.idea.workspaces.WorkspaceProjectComponent</implementation-class>
         </component>
     </project-components>
+
 </idea-plugin>
