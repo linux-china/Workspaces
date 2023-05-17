@@ -67,6 +67,18 @@ public final class WorkspaceManager {
         }
     }
 
+    public void appendFileToWorkspace(String workspaceName, String fileUrl) {
+        for (Workspace workspace : this.workspacesModel) {
+            if (workspace.getName().equals(workspaceName)) {
+                final List<String> fileUrls = workspace.getFileUrls();
+                if (!fileUrls.contains(fileUrl)) {
+                    fileUrls.add(fileUrl);
+                }
+                break;
+            }
+        }
+    }
+
 
     public void removeWorkspaces(int[] indicesToRemove) {
         JBList<Workspace> workspaceList = project.getService(WorkspaceStateService.class).getWorkspaceJBList(project);
