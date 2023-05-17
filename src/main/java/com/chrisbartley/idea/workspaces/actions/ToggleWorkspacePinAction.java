@@ -37,7 +37,7 @@ public final class ToggleWorkspacePinAction extends BaseWorkspaceAction {
             if (this.list != null) {
                 if (!this.list.getSelectionModel().isSelectionEmpty()) {
                     getWorkspaceManager(project).toggleWorkspacePinnedness(this.list.getSelectedValuesList());
-                    RefreshableListModel model = (RefreshableListModel) this.list.getModel();
+                    RefreshableListModel<Workspace> model = (RefreshableListModel<Workspace>) this.list.getModel();
                     model.refresh(this.list.getSelectedIndices());
                 }
             } else {

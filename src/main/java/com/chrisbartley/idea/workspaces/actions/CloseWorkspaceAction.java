@@ -23,7 +23,7 @@ public final class CloseWorkspaceAction extends BaseWorkspaceAction {
         if (project != null) {
             if (!this.jList.getSelectionModel().isSelectionEmpty()) {
                 getWorkspaceManager(project).closeWorkspaces(this.jList.getSelectedValuesList());
-                RefreshableListModel model = (RefreshableListModel) this.jList.getModel();
+                RefreshableListModel<Workspace> model = (RefreshableListModel<Workspace>) this.jList.getModel();
                 model.refresh(this.jList.getSelectedIndices());
             }
         }

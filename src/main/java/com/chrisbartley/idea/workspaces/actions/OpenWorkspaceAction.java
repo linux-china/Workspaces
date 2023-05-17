@@ -22,7 +22,7 @@ public final class OpenWorkspaceAction extends BaseWorkspaceAction {
         if (project != null) {
             if (!this.jList.getSelectionModel().isSelectionEmpty()) {
                 getWorkspaceManager(project).openWorkspaces(this.jList.getSelectedValuesList());
-                RefreshableListModel model = (RefreshableListModel) this.jList.getModel();
+                RefreshableListModel<Workspace> model = (RefreshableListModel<Workspace>) this.jList.getModel();
                 model.refresh(this.jList.getSelectedIndices());
             }
         }
