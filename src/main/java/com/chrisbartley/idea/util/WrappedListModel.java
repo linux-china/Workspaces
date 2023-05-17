@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 
-public class WrappedListModel<T> extends RefreshableListModel implements List<T>, ListModel {
+public class WrappedListModel<T> extends RefreshableListModel<T> implements List<T> {
     private final List<T> wrappedList;
 
     public WrappedListModel(List<T> wrappedList) {
