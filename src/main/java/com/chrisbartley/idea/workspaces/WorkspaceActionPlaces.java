@@ -10,8 +10,3 @@ public final class WorkspaceActionPlaces {
   public static final String CONFIGURE_WORKSPACE_DIALOG = "CONFIGURE_WORKSPACE_DIALOG";
 }
 
-
-/* Location:              /Users/linux_china/Downloads/Workspaces_293.jar!/com/chrisbartley/idea/workspaces/WorkspaceActionPlaces.class
- * Java compiler version: 2 (46.0)
- * JD-Core Version:       1.1.3
- */
