@@ -14,7 +14,7 @@ public class MoveDownAction extends AnAction {
     private final ReorderableListModel<?> listModel;
 
     public MoveDownAction(JList<?> list) {
-        super("Move down", "Move the selected item(s) down", Icons.MOVE_DOWN);
+        super("Move Down", "Move the selected item(s) down", Icons.MOVE_DOWN);
         this.list = list;
         this.listModel = (ReorderableListModel<?>) list.getModel();
     }
