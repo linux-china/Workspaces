@@ -88,10 +88,13 @@ public class WorkspaceProjectComponent implements ProjectComponent {
     }
 
     private void registerAppendFileMenu() {
-        DefaultActionGroup editorTabPopupMenu = (DefaultActionGroup) ActionManager.getInstance().getAction("EditorTabPopupMenu");
         appendToWorkspaceMenu.add(this.appendToWorkspaceActionGroup);
+        DefaultActionGroup editorTabPopupMenu = (DefaultActionGroup) ActionManager.getInstance().getAction("EditorTabPopupMenu");
+        DefaultActionGroup projectViewPopupMenu = (DefaultActionGroup) ActionManager.getInstance().getAction("ProjectViewPopupMenu");
         editorTabPopupMenu.remove(this.appendToWorkspaceMenu);
         editorTabPopupMenu.add(this.appendToWorkspaceMenu);
+        projectViewPopupMenu.remove(this.appendToWorkspaceMenu);
+        projectViewPopupMenu.add(this.appendToWorkspaceMenu);
     }
 
     private void showHideToolWindow() {
