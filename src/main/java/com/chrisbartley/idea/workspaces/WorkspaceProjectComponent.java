@@ -9,9 +9,13 @@ import com.intellij.openapi.components.ProjectComponent;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindowManager;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class WorkspaceProjectComponent implements ProjectComponent {
+    private static final Map<Project, DefaultActionGroup> PROJECT_WORKSPACES_MENUS = new HashMap<>();
+    private static final Map<Project, DefaultActionGroup> PROJECT_POPUP_MENUS = new HashMap<>();
     private static final Constraints WORKSPACES_MENU_PLACEMENT = new Constraints(Anchor.BEFORE, "HelpMenu");
     private final DefaultActionGroup workspacesMenu = new DefaultActionGroup("Wor_kspaces", false);
     private final MutableActionGroup toggleWorkspaceOpennessActionGroup = new MutableActionGroup(new ToggleWorkspaceOpennessActionGroup());
@@ -38,7 +42,6 @@ public class WorkspaceProjectComponent implements ProjectComponent {
 
     @Override
     public void projectOpened() {
-
         this.workspacesMenu.add(this.toggleWorkspaceOpennessActionGroup);
         this.workspacesMenu.addSeparator();
         this.workspacesMenu.add(this.closeAllWorkspacesExceptThisActionGroup);
@@ -50,8 +53,6 @@ public class WorkspaceProjectComponent implements ProjectComponent {
         this.workspacesMenu.addSeparator();
         this.workspacesMenu.add(this.removeActionGroup);
         this.workspacesMenu.add(this.createWorkspaceAction);
-
-
         this.createWorkspaceAction.register();
         this.closeAllWorkspacesAction.register();
         this.closeAllNonWorkspaceFilesAction.register();
@@ -63,12 +64,14 @@ public class WorkspaceProjectComponent implements ProjectComponent {
         if (workspacesConfiguration.getState().isDisplayToolWindowUI()) {
             showHideToolWindow();
         }
-
         registerAppendFileMenu();
     }
 
     @Override
     public void projectClosed() {
+        PROJECT_WORKSPACES_MENUS.remove(this.project);
+        DefaultActionGroup mainMenu = (DefaultActionGroup) ActionManager.getInstance().getAction("MainMenu");
+        mainMenu.remove(this.workspacesMenu);
         this.createWorkspaceAction.unregister();
         this.closeAllWorkspacesAction.unregister();
         this.closeAllNonWorkspaceFilesAction.unregister();
@@ -78,6 +81,7 @@ public class WorkspaceProjectComponent implements ProjectComponent {
         this.configureActionGroup.removeAll();
         this.removeActionGroup.removeAll();
         this.workspacesMenu.removeAll();
+        unRegisterAppendFileMenu();
     }
 
 
@@ -85,6 +89,7 @@ public class WorkspaceProjectComponent implements ProjectComponent {
         DefaultActionGroup mainMenu = (DefaultActionGroup) ActionManager.getInstance().getAction("MainMenu");
         mainMenu.remove(this.workspacesMenu);
         mainMenu.add(this.workspacesMenu, WORKSPACES_MENU_PLACEMENT);
+        PROJECT_WORKSPACES_MENUS.put(this.project, this.workspacesMenu);
     }
 
     private void registerAppendFileMenu() {
@@ -95,6 +100,15 @@ public class WorkspaceProjectComponent implements ProjectComponent {
         editorTabPopupMenu.add(this.appendToWorkspaceMenu);
         projectViewPopupMenu.remove(this.appendToWorkspaceMenu);
         projectViewPopupMenu.add(this.appendToWorkspaceMenu);
+        PROJECT_POPUP_MENUS.put(this.project, this.appendToWorkspaceMenu);
+    }
+
+    private void unRegisterAppendFileMenu() {
+        DefaultActionGroup editorTabPopupMenu = (DefaultActionGroup) ActionManager.getInstance().getAction("EditorTabPopupMenu");
+        DefaultActionGroup projectViewPopupMenu = (DefaultActionGroup) ActionManager.getInstance().getAction("ProjectViewPopupMenu");
+        editorTabPopupMenu.remove(this.appendToWorkspaceMenu);
+        projectViewPopupMenu.remove(this.appendToWorkspaceMenu);
+        PROJECT_POPUP_MENUS.remove(this.project);
     }
 
     private void showHideToolWindow() {
