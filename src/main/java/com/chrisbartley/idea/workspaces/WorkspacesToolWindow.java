@@ -18,6 +18,7 @@ final class WorkspacesToolWindow extends JPanel {
         final WorkspaceProjectComponent workspaceProjectComponent = project.getComponent(WorkspaceProjectComponent.class);
         RefreshListModelActionGroup toolbarGroup = new RefreshListModelActionGroup((RefreshableListModel<Workspace>) jList.getModel());
         OpenWorkspaceAction openWorkspaceAction = new OpenWorkspaceAction(jList);
+        CloseAllTabsAndOpenWorkspaceAction closeAllTabsAndOpenWorkspaceAction = new CloseAllTabsAndOpenWorkspaceAction(jList);
         CloseWorkspaceAction closeWorkspaceAction = new CloseWorkspaceAction(jList);
         ToggleWorkspacePinAction toggleWorkspacePinnedAction = new ToggleWorkspacePinAction(jList);
         ConfigureWorkspaceAction configureWorkspaceAction = new ConfigureWorkspaceAction(jList);
@@ -36,6 +37,7 @@ final class WorkspacesToolWindow extends JPanel {
         DefaultActionGroup popupActionGroup = new DefaultActionGroup("WorkspacesPopup", true);
         if (workspacesConfiguration.getState().isDisplayButtonActionsInContextMenu()) {
             popupActionGroup.add(openWorkspaceAction);
+            popupActionGroup.add(closeAllTabsAndOpenWorkspaceAction);
             popupActionGroup.add(closeWorkspaceAction);
             popupActionGroup.add(toggleWorkspacePinnedAction);
             popupActionGroup.add(Separator.getInstance());
