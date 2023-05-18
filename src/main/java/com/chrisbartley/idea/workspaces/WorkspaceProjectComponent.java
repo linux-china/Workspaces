@@ -35,6 +35,7 @@ public class WorkspaceProjectComponent implements ProjectComponent {
 
 
     private final Project project;
+    private boolean workspaceMenuIsVisible = false;
 
     public WorkspaceProjectComponent(Project project) {
         this.project = project;
@@ -42,6 +43,24 @@ public class WorkspaceProjectComponent implements ProjectComponent {
 
     @Override
     public void projectOpened() {
+        final WorkspacesConfiguration workspacesConfiguration = ApplicationManager.getApplication().getService(WorkspacesConfiguration.class);
+        this.workspaceMenuIsVisible = workspacesConfiguration.getState().isDisplayMainMenuUI();
+        if (workspaceMenuIsVisible) {
+            registerWorkspacesMenu();
+        }
+        if (workspacesConfiguration.getState().isDisplayToolWindowUI()) {
+            showHideToolWindow();
+        }
+        registerAppendFileMenu();
+    }
+
+    @Override
+    public void projectClosed() {
+        unRegisterWorkspacesMenu();
+        unRegisterAppendFileMenu();
+    }
+
+    private void registerWorkspacesMenu() {
         this.workspacesMenu.add(this.toggleWorkspaceOpennessActionGroup);
         this.workspacesMenu.addSeparator();
         this.workspacesMenu.add(this.closeAllWorkspacesExceptThisActionGroup);
@@ -56,22 +75,21 @@ public class WorkspaceProjectComponent implements ProjectComponent {
         this.createWorkspaceAction.register();
         this.closeAllWorkspacesAction.register();
         this.closeAllNonWorkspaceFilesAction.register();
-
-        final WorkspacesConfiguration workspacesConfiguration = ApplicationManager.getApplication().getService(WorkspacesConfiguration.class);
-        if (workspacesConfiguration.getState().isDisplayMainMenuUI()) {
-            showHideWorkspacesMenu();
+        DefaultActionGroup mainMenu = (DefaultActionGroup) ActionManager.getInstance().getAction("MainMenu");
+        // remove all other workspaces menus
+        for (DefaultActionGroup otherWorkspacesMenu : PROJECT_WORKSPACES_MENUS.values()) {
+            mainMenu.remove(otherWorkspacesMenu);
         }
-        if (workspacesConfiguration.getState().isDisplayToolWindowUI()) {
-            showHideToolWindow();
-        }
-        registerAppendFileMenu();
+        mainMenu.add(this.workspacesMenu, WORKSPACES_MENU_PLACEMENT);
+        PROJECT_WORKSPACES_MENUS.put(this.project, this.workspacesMenu);
     }
 
-    @Override
-    public void projectClosed() {
-        PROJECT_WORKSPACES_MENUS.remove(this.project);
-        DefaultActionGroup mainMenu = (DefaultActionGroup) ActionManager.getInstance().getAction("MainMenu");
-        mainMenu.remove(this.workspacesMenu);
+    private void unRegisterWorkspacesMenu() {
+        if (workspaceMenuIsVisible) {
+            PROJECT_WORKSPACES_MENUS.remove(this.project);
+            DefaultActionGroup mainMenu = (DefaultActionGroup) ActionManager.getInstance().getAction("MainMenu");
+            mainMenu.remove(this.workspacesMenu);
+        }
         this.createWorkspaceAction.unregister();
         this.closeAllWorkspacesAction.unregister();
         this.closeAllNonWorkspaceFilesAction.unregister();
@@ -81,24 +99,18 @@ public class WorkspaceProjectComponent implements ProjectComponent {
         this.configureActionGroup.removeAll();
         this.removeActionGroup.removeAll();
         this.workspacesMenu.removeAll();
-        unRegisterAppendFileMenu();
-    }
-
-
-    private void showHideWorkspacesMenu() {
-        DefaultActionGroup mainMenu = (DefaultActionGroup) ActionManager.getInstance().getAction("MainMenu");
-        mainMenu.remove(this.workspacesMenu);
-        mainMenu.add(this.workspacesMenu, WORKSPACES_MENU_PLACEMENT);
-        PROJECT_WORKSPACES_MENUS.put(this.project, this.workspacesMenu);
     }
 
     private void registerAppendFileMenu() {
         appendToWorkspaceMenu.add(this.appendToWorkspaceActionGroup);
         DefaultActionGroup editorTabPopupMenu = (DefaultActionGroup) ActionManager.getInstance().getAction("EditorTabPopupMenu");
         DefaultActionGroup projectViewPopupMenu = (DefaultActionGroup) ActionManager.getInstance().getAction("ProjectViewPopupMenu");
-        editorTabPopupMenu.remove(this.appendToWorkspaceMenu);
+        // remove all other pop-up menus
+        for (DefaultActionGroup otherPopupMenu : PROJECT_POPUP_MENUS.values()) {
+            projectViewPopupMenu.remove(otherPopupMenu);
+            editorTabPopupMenu.remove(otherPopupMenu);
+        }
         editorTabPopupMenu.add(this.appendToWorkspaceMenu);
-        projectViewPopupMenu.remove(this.appendToWorkspaceMenu);
         projectViewPopupMenu.add(this.appendToWorkspaceMenu);
         PROJECT_POPUP_MENUS.put(this.project, this.appendToWorkspaceMenu);
     }
