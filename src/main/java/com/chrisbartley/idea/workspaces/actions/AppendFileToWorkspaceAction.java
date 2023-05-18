@@ -29,18 +29,12 @@ public class AppendFileToWorkspaceAction extends BaseWorkspaceAction {
         if (project != null) {
             final VirtualFile[] virtualFiles = event.getData(CommonDataKeys.VIRTUAL_FILE_ARRAY);
             if (virtualFiles != null && virtualFiles.length > 0) {
-                VirtualFileUtils.getUrls(virtualFiles).forEach(fileUrl -> {
-                    if (!workspace.getFileUrls().contains(fileUrl)) {
-                        workspace.getFileUrls().add(fileUrl);
-                    }
-                });
+                workspace.addFileUrls(VirtualFileUtils.getUrls(virtualFiles));
             } else {
                 final VirtualFile virtualFile = event.getData(CommonDataKeys.VIRTUAL_FILE);
                 if (virtualFile != null) {
                     final String fileUrl = VirtualFileUtils.getUrl(virtualFile);
-                    if (!workspace.getFileUrls().contains(fileUrl)) {
-                        workspace.getFileUrls().add(fileUrl);
-                    }
+                    workspace.addFileUrl(fileUrl);
                 }
             }
         }
