@@ -4,6 +4,12 @@
 
 ## [Unreleased]
 
+## [0.15.0]
+
+### Added
+
+- Multi files append to workspace support by right click files in project view.
+
 ## [0.14.0]
 
 ### Added
