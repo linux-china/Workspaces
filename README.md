@@ -1,6 +1,9 @@
 Workspaces plugin
 =================
 
+Workspaces, a plugin for JetBrains IDEs, enables you to create and manage named groups of files(workspace)  within a
+project. https://plugins.jetbrains.com/plugin/21829-workspaces
+
 <!-- Plugin description -->
 
 Migrated from unmaintained https://plugins.jetbrains.com/plugin/83-workspaces, and thanks for Chris Bartley's work.
