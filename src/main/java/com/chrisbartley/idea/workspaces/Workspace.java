@@ -4,6 +4,7 @@ import com.chrisbartley.idea.util.VirtualFileUtils;
 import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
@@ -39,6 +40,18 @@ public final class Workspace {
         this.isPinned = pinned;
     }
 
+
+    public void addFileUrl(@NotNull String fileUrl) {
+        if (!fileUrl.isEmpty() && !this.fileUrls.contains(fileUrl)) {
+            this.fileUrls.add(fileUrl);
+        }
+    }
+
+    public void addFileUrls(List<String> fileUrls) {
+        for (String fileUrl : fileUrls) {
+            addFileUrl(fileUrl);
+        }
+    }
 
     public void update(String newName, List<String> newUrls) {
         if (newName != null && !newName.isEmpty()) {
