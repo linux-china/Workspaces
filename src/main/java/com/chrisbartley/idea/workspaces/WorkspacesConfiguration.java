@@ -8,9 +8,9 @@ import org.jetbrains.annotations.NotNull;
 @State(name = "WorkspacesConfiguration", storages = {@Storage(value = "workspaces-configuration.xml")})
 public final class WorkspacesConfiguration implements PersistentStateComponent<WorkspacesConfiguration.State> {
     public static class State {
-        private boolean isDisplayMainMenuUI = true;
+        private boolean isDisplayMainMenuUI = false;
         private boolean isPinAnUnpinnedOpenWorkspaceSelectedFromMenu = true;
-        private boolean isDisplayToolWindowUI = true;
+        private boolean isDisplayToolWindowUI = false;
         private boolean isDisplayButtonActionsInContextMenu = true;
         private boolean isAutoPin = true;
         private boolean isAutoPinUponExplicitOpenOnly = true;
