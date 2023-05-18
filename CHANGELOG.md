@@ -10,7 +10,7 @@
 
 - Append current file to workspace by right click file tab.
 - Append current file to workspace by right click file in project view.
-- Close all editor tabs and open current workspace.
+- Close all editor tabs and open current workspaces.
 
 ### Changed
 
