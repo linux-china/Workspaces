@@ -16,7 +16,8 @@
                 instance="com.chrisbartley.idea.workspaces.WorkspacesConfigurable"
                 id="com.chrisbartley.idea.workspaces.WorkspacesConfigurable"
                 displayName="Workspaces"/>
-        <toolWindow id="Workspaces" icon="/com/chrisbartley/idea/workspaces/icons/workspace.png" anchor="left"
+        <toolWindow id="Workspaces" icon="/com/chrisbartley/idea/workspaces/icons/workspace.png"
+                    anchor="left" order="after Project"
                     factoryClass="com.chrisbartley.idea.workspaces.WorkspaceToolWindowFactory"/>
     </extensions>
 
