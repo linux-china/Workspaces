@@ -4,6 +4,12 @@
 
 ## [Unreleased]
 
+## [0.14.3]
+
+### Fixed
+
+- API compatible bugs with IntelliJ IDEA 2024.1
+
 ## [0.14.2]
 
 ### Added
