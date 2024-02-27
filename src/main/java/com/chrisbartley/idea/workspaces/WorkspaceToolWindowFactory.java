@@ -15,7 +15,7 @@ public class WorkspaceToolWindowFactory implements ToolWindowFactory {
         final JBList<Workspace> workspaceList = workspaceService.getWorkspaceJBList(project);
         final WorkspacesConfiguration workspacesConfiguration = ApplicationManager.getApplication().getService(WorkspacesConfiguration.class);
         var workspaceWindowPanel = new WorkspacesToolWindow(project, workspacesConfiguration, workspaceList);
-        var contentFactory = ContentFactory.SERVICE.getInstance();
+        var contentFactory = ContentFactory.getInstance();
         var content = contentFactory.createContent(workspaceWindowPanel, "", false);
         toolWindow.getContentManager().addContent(content);
     }
