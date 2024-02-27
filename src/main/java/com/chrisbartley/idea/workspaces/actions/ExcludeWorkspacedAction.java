@@ -3,6 +3,7 @@ package com.chrisbartley.idea.workspaces.actions;
 import com.chrisbartley.idea.util.IncludableItem;
 import com.chrisbartley.idea.util.WrappedListModel;
 import com.chrisbartley.idea.workspaces.Icons;
+import com.intellij.openapi.actionSystem.ActionUpdateThread;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import org.jetbrains.annotations.NotNull;
@@ -34,6 +35,10 @@ final class ExcludeWorkspacedAction extends AnAction {
 
     public void update(AnActionEvent event) {
         event.getPresentation().setEnabled((this.listModel.getSize() > 0));
+    }
+
+    public @NotNull ActionUpdateThread getActionUpdateThread() {
+        return ActionUpdateThread.EDT;
     }
 }
 

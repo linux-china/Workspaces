@@ -3,6 +3,7 @@ package com.chrisbartley.idea.workspaces.actions;
 import com.chrisbartley.idea.util.IncludableItem;
 import com.chrisbartley.idea.util.RefreshableListModel;
 import com.chrisbartley.idea.workspaces.Icons;
+import com.intellij.openapi.actionSystem.ActionUpdateThread;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import org.jetbrains.annotations.NotNull;
@@ -33,6 +34,10 @@ final class IncludeAction extends AnAction {
 
     public void update(AnActionEvent event) {
         event.getPresentation().setEnabled(!this.jList.getSelectionModel().isSelectionEmpty());
+    }
+
+    public @NotNull ActionUpdateThread getActionUpdateThread() {
+        return ActionUpdateThread.EDT;
     }
 }
 

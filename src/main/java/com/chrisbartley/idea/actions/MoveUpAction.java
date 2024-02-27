@@ -2,6 +2,7 @@ package com.chrisbartley.idea.actions;
 
 import com.chrisbartley.idea.util.Icons;
 import com.chrisbartley.idea.util.ReorderableListModel;
+import com.intellij.openapi.actionSystem.ActionUpdateThread;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import org.jetbrains.annotations.NotNull;
@@ -36,5 +37,9 @@ public class MoveUpAction extends AnAction {
 
     public void update(AnActionEvent event) {
         event.getPresentation().setEnabled((this.list.getSelectionModel().getMinSelectionIndex() > 0));
+    }
+
+    public @NotNull ActionUpdateThread getActionUpdateThread() {
+        return ActionUpdateThread.EDT;
     }
 }
