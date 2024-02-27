@@ -2,7 +2,6 @@ package com.chrisbartley.idea.util;
 
 import org.jetbrains.annotations.NotNull;
 
-import javax.swing.*;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
