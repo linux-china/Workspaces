@@ -4,6 +4,12 @@
 
 ## [Unreleased]
 
+## [0.14.5]
+
+### Fixed
+
+- Compatible bugs with IntelliJ IDEA 2025.1
+
 ## [0.14.3]
 
 ### Fixed
