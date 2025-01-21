@@ -7,6 +7,7 @@ import com.intellij.openapi.project.Project;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
+import java.util.List;
 
 
 public final class ConfigureWorkspaceAction extends BaseWorkspaceAction {
@@ -32,12 +33,11 @@ public final class ConfigureWorkspaceAction extends BaseWorkspaceAction {
         Project project = event.getProject();
         if (project != null) {
             if (this.jList != null && !this.jList.getSelectionModel().isSelectionEmpty()) {
-                Object[] selectedWorkspaces = this.jList.getSelectedValues();
-                if (selectedWorkspaces.length == 1) {
-                    this.workspace = (Workspace) selectedWorkspaces[0];
+                List<Workspace> selectedWorkspaces = this.jList.getSelectedValuesList();
+                if (selectedWorkspaces.size() == 1) {
+                    this.workspace = selectedWorkspaces.get(0);
                 }
             }
-
 
             if (this.workspace != null) {
                 ConfigureWorkspaceDialog dialog = new ConfigureWorkspaceDialog("Workspace Properties", "OK", this.workspace);
