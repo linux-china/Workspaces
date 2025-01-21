@@ -19,12 +19,7 @@
         <toolWindow id="Workspaces" icon="/com/chrisbartley/idea/workspaces/icons/workspace.png"
                     anchor="left" order="after Project"
                     factoryClass="com.chrisbartley.idea.workspaces.WorkspaceToolWindowFactory"/>
+        <projectService serviceImplementation="com.chrisbartley.idea.workspaces.WorkspaceProjectComponent"/>
     </extensions>
-
-    <project-components>
-        <component>
-            <implementation-class>com.chrisbartley.idea.workspaces.WorkspaceProjectComponent</implementation-class>
-        </component>
-    </project-components>
 
 </idea-plugin>

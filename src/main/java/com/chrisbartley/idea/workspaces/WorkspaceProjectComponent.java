@@ -3,6 +3,7 @@ package com.chrisbartley.idea.workspaces;
 import com.chrisbartley.idea.actions.MutableActionGroup;
 import com.chrisbartley.idea.actions.RegisterableAction;
 import com.chrisbartley.idea.workspaces.actions.*;
+import com.intellij.openapi.Disposable;
 import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.ProjectComponent;
@@ -13,7 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class WorkspaceProjectComponent implements ProjectComponent {
+public class WorkspaceProjectComponent implements Disposable {
     private static final Map<Project, DefaultActionGroup> PROJECT_WORKSPACES_MENUS = new HashMap<>();
     private static final Map<Project, DefaultActionGroup> PROJECT_POPUP_MENUS = new HashMap<>();
     private static final Constraints WORKSPACES_MENU_PLACEMENT = new Constraints(Anchor.BEFORE, "HelpMenu");
@@ -39,9 +40,14 @@ public class WorkspaceProjectComponent implements ProjectComponent {
 
     public WorkspaceProjectComponent(Project project) {
         this.project = project;
+        projectOpened();
     }
 
     @Override
+    public void dispose() {
+        projectClosed();
+    }
+
     public void projectOpened() {
         final WorkspacesConfiguration workspacesConfiguration = ApplicationManager.getApplication().getService(WorkspacesConfiguration.class);
         this.workspaceMenuIsVisible = workspacesConfiguration.getState().isDisplayMainMenuUI();
@@ -54,7 +60,6 @@ public class WorkspaceProjectComponent implements ProjectComponent {
         registerAppendFileMenu();
     }
 
-    @Override
     public void projectClosed() {
         unRegisterWorkspacesMenu();
         unRegisterAppendFileMenu();

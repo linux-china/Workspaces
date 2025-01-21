@@ -15,7 +15,7 @@ import java.awt.*;
 final class WorkspacesToolWindow extends JPanel {
     public WorkspacesToolWindow(Project project, WorkspacesConfiguration workspacesConfiguration, JBList<Workspace> jList) {
         super(new BorderLayout());
-        final WorkspaceProjectComponent workspaceProjectComponent = project.getComponent(WorkspaceProjectComponent.class);
+        final WorkspaceProjectComponent workspaceProjectComponent = project.getService(WorkspaceProjectComponent.class);
         RefreshListModelActionGroup toolbarGroup = new RefreshListModelActionGroup((RefreshableListModel<Workspace>) jList.getModel());
         OpenWorkspaceAction openWorkspaceAction = new OpenWorkspaceAction(jList);
         CloseAllTabsAndOpenWorkspaceAction closeAllTabsAndOpenWorkspaceAction = new CloseAllTabsAndOpenWorkspaceAction(jList);
