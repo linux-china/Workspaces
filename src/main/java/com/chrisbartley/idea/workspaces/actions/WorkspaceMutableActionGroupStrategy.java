@@ -6,7 +6,7 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 
 public abstract class WorkspaceMutableActionGroupStrategy extends MutableActionGroupStrategy {
     protected final WorkspaceManager getWorkspaceManager(AnActionEvent event) {
-        return getProject(event).getService(WorkspaceManager.class);
+        return event.getProject().getService(WorkspaceManager.class);
     }
 }
 

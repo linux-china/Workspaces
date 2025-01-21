@@ -11,9 +11,6 @@ public abstract class MutableActionGroupStrategy {
 
     public void preparePresentation(AnActionEvent event) {
     }
-
-    protected final Project getProject(AnActionEvent event) {
-        return (Project) event.getDataContext().getData("project");
-    }
+    
 }
 
