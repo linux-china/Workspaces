@@ -21,7 +21,7 @@ public final class CreateWorkspaceAction
 
 
     public void actionPerformed(@NotNull AnActionEvent event) {
-        Project project = getProject(event);
+        Project project = event.getProject();
         if (project != null) {
             WorkspaceManager workspaceManager = getWorkspaceManager(project);
             Set<String> boundFileUrls = workspaceManager.getBoundFileUrls();
@@ -38,7 +38,7 @@ public final class CreateWorkspaceAction
 
 
     public void update(@NotNull AnActionEvent event) {
-        Project project = getProject(event);
+        Project project = event.getProject();
         Presentation presentation = event.getPresentation();
         if (project != null) {
             String text, description;

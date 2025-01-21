@@ -23,7 +23,7 @@ public final class RefreshListModelActionGroup extends BaseActionGroup {
 
 
     public void update(@NotNull AnActionEvent event) {
-        Project project = getProject(event);
+        Project project = event.getProject();
         if (project != null) {
             WorkspaceManager workspaceManager = project.getService(WorkspaceManager.class);
             workspaceManager.updateImplicitAutoPinningAndUnpinning();

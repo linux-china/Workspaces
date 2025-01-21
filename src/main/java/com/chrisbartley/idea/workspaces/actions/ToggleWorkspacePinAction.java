@@ -32,7 +32,7 @@ public final class ToggleWorkspacePinAction extends BaseWorkspaceAction {
 
 
     public void actionPerformed(@NotNull AnActionEvent event) {
-        Project project = getProject(event);
+        Project project = event.getProject();
         if (project != null) {
             if (this.list != null) {
                 if (!this.list.getSelectionModel().isSelectionEmpty()) {
@@ -48,7 +48,7 @@ public final class ToggleWorkspacePinAction extends BaseWorkspaceAction {
 
 
     public void update(@NotNull AnActionEvent event) {
-        if (getProject(event) != null) {
+        if (event.getProject() != null) {
             if (this.list != null) {
                 event.getPresentation().setEnabled(!this.list.getSelectionModel().isSelectionEmpty());
             } else {

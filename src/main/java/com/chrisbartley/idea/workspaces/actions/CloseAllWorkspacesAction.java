@@ -14,7 +14,7 @@ public final class CloseAllWorkspacesAction extends BaseWorkspaceAction {
 
 
     public void actionPerformed(@NotNull AnActionEvent event) {
-        Project project = getProject(event);
+        Project project = event.getProject();
         if (project != null) {
             getWorkspaceManager(project).closeAllWorkspaces();
         }
@@ -22,7 +22,7 @@ public final class CloseAllWorkspacesAction extends BaseWorkspaceAction {
 
 
     public void update(@NotNull AnActionEvent event) {
-        Project project = getProject(event);
+        Project project = event.getProject();
         if (project != null) {
 
             event.getPresentation().setEnabled((getWorkspaceManager(project).getWorkspaceCount() > 0));

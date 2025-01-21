@@ -29,7 +29,7 @@ public final class MutableActionGroup extends BaseActionGroup {
 
     public void update(@NotNull AnActionEvent event) {
         removeAll();
-        if (getProject(event) != null) {
+        if (event.getProject() != null) {
             List<RegisterableAction> actions = this.strategy.getActions(event);
             for (RegisterableAction action : actions) {
                 add(action);

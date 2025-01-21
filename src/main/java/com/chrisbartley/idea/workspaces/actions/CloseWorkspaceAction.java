@@ -19,7 +19,7 @@ public final class CloseWorkspaceAction extends BaseWorkspaceAction {
 
 
     public void actionPerformed(@NotNull AnActionEvent event) {
-        Project project = getProject(event);
+        Project project = event.getProject();
         if (project != null) {
             if (!this.jList.getSelectionModel().isSelectionEmpty()) {
                 getWorkspaceManager(project).closeWorkspaces(this.jList.getSelectedValuesList());

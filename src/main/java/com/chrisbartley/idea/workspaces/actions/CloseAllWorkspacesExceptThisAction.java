@@ -31,7 +31,7 @@ public final class CloseAllWorkspacesExceptThisAction extends BaseWorkspaceActio
 
 
     public void actionPerformed(@NotNull AnActionEvent event) {
-        Project project = getProject(event);
+        Project project = event.getProject();
         if (project != null) {
             if (this.jList != null) {
                 if (!this.jList.getSelectionModel().isSelectionEmpty()) {
@@ -47,7 +47,7 @@ public final class CloseAllWorkspacesExceptThisAction extends BaseWorkspaceActio
 
 
     public void update(@NotNull AnActionEvent event) {
-        Project project = getProject(event);
+        Project project = event.getProject();
         if (project != null) {
             if (this.jList != null) {
                 event.getPresentation().setEnabled(!this.jList.getSelectionModel().isSelectionEmpty());

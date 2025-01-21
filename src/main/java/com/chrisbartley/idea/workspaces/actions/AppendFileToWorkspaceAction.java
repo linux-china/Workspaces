@@ -25,7 +25,7 @@ public class AppendFileToWorkspaceAction extends BaseWorkspaceAction {
 
     @Override
     public void actionPerformed(@NotNull AnActionEvent event) {
-        final Project project = event.getData(CommonDataKeys.PROJECT);
+        final Project project = event.getProject();
         if (project != null) {
             final VirtualFile[] virtualFiles = event.getData(CommonDataKeys.VIRTUAL_FILE_ARRAY);
             if (virtualFiles != null && virtualFiles.length > 0) {

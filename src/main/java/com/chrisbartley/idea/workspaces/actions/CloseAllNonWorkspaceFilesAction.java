@@ -18,7 +18,7 @@ public final class CloseAllNonWorkspaceFilesAction extends BaseWorkspaceAction {
 
 
     public void actionPerformed(@NotNull AnActionEvent event) {
-        Project project = getProject(event);
+        Project project = event.getProject();
         if (project != null) {
 
             FileEditorManager fileEditorManager = FileEditorManager.getInstance(project);
@@ -36,7 +36,7 @@ public final class CloseAllNonWorkspaceFilesAction extends BaseWorkspaceAction {
 
 
     public void update(@NotNull AnActionEvent event) {
-        Project project = getProject(event);
+        Project project = event.getProject();
         if (project != null) {
 
             VirtualFile[] openFiles = FileEditorManager.getInstance(project).getOpenFiles();

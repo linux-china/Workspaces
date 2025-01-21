@@ -29,7 +29,7 @@ public final class ConfigureWorkspaceAction extends BaseWorkspaceAction {
 
 
     public void actionPerformed(@NotNull AnActionEvent event) {
-        Project project = getProject(event);
+        Project project = event.getProject();
         if (project != null) {
             if (this.jList != null && !this.jList.getSelectionModel().isSelectionEmpty()) {
                 Object[] selectedWorkspaces = this.jList.getSelectedValues();
@@ -52,7 +52,7 @@ public final class ConfigureWorkspaceAction extends BaseWorkspaceAction {
 
 
     public void update(@NotNull AnActionEvent event) {
-        if (getProject(event) != null) {
+        if (event.getProject() != null) {
             if (this.jList != null) {
                 event.getPresentation().setEnabled((!this.jList.getSelectionModel().isSelectionEmpty() && (this.jList.getSelectedIndices()).length == 1));
             } else {

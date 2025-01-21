@@ -14,11 +14,7 @@ public abstract class BaseActionGroup extends DefaultActionGroup {
     public BaseActionGroup(String shortName, boolean popup) {
         super(shortName, popup);
     }
-
-
-    protected final Project getProject(AnActionEvent event) {
-        return (Project) event.getDataContext().getData("project");
-    }
+    
 
     @Override
     public @NotNull ActionUpdateThread getActionUpdateThread() {

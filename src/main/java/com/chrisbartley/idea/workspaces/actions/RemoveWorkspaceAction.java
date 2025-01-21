@@ -34,7 +34,7 @@ public final class RemoveWorkspaceAction extends BaseWorkspaceAction {
 
 
     public void actionPerformed(@NotNull AnActionEvent event) {
-        Project project = getProject(event);
+        Project project = event.getProject();
         if (project != null) {
             int[] indicesToRemove = null;
             if (this.jList != null) {
@@ -66,7 +66,7 @@ public final class RemoveWorkspaceAction extends BaseWorkspaceAction {
 
 
     public void update(@NotNull AnActionEvent event) {
-        if (getProject(event) != null) {
+        if (event.getProject() != null) {
             if (this.jList != null) {
                 event.getPresentation().setEnabled(!this.jList.getSelectionModel().isSelectionEmpty());
             }

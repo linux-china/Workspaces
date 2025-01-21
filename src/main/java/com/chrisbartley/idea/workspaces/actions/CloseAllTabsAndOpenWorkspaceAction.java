@@ -19,7 +19,7 @@ public final class CloseAllTabsAndOpenWorkspaceAction extends BaseWorkspaceActio
     }
 
     public void actionPerformed(@NotNull AnActionEvent event) {
-        Project project = getProject(event);
+        Project project = event.getProject();
         if (project != null) {
             if (!this.jList.getSelectionModel().isSelectionEmpty()) {
                 final FileEditorManager fileEditorManager = FileEditorManager.getInstance(project);
