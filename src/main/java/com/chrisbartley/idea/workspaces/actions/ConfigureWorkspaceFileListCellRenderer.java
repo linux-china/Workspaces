@@ -2,9 +2,9 @@ package com.chrisbartley.idea.workspaces.actions;
 
 import com.chrisbartley.idea.util.IncludableItem;
 import com.chrisbartley.idea.workspaces.Icons;
-import com.intellij.icons.AllIcons;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
+import com.intellij.ui.JBColor;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,17 +22,19 @@ final class ConfigureWorkspaceFileListCellRenderer extends JLabel implements Lis
         VirtualFile virtualFile = VirtualFileManager.getInstance().findFileByUrl(url);
         if (virtualFile != null) {
             setText(virtualFile.getPresentableUrl());
-            setIcon(item.isIncluded() ? Icons.INCLUDED : Icons.EXCLUDED);
         } else {
             setText(url);
-            setIcon(AllIcons.Ide.FatalError);
         }
+        setIcon(item.isIncluded() ? Icons.INCLUDED : Icons.EXCLUDED);
         if (isSelected) {
             setBackground(list.getSelectionBackground());
             setForeground(list.getSelectionForeground());
         } else {
             setBackground(list.getBackground());
             setForeground(list.getForeground());
+        }
+        if (virtualFile == null) {
+            setForeground(JBColor.RED);
         }
         return this;
     }
