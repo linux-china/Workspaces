@@ -2,6 +2,7 @@ package com.chrisbartley.idea.workspaces.actions;
 
 import com.chrisbartley.idea.util.IncludableItem;
 import com.chrisbartley.idea.workspaces.Icons;
+import com.intellij.icons.AllIcons;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
 
@@ -19,8 +20,13 @@ final class ConfigureWorkspaceFileListCellRenderer extends JLabel implements Lis
     public Component getListCellRendererComponent(JList<? extends IncludableItem<String>> list, IncludableItem<String> item, int index, boolean isSelected, boolean cellHasFocus) {
         String url = item.getItem();
         VirtualFile virtualFile = VirtualFileManager.getInstance().findFileByUrl(url);
-        setText(virtualFile.getPresentableUrl());
-        setIcon(item.isIncluded() ? Icons.INCLUDED : Icons.EXCLUDED);
+        if (virtualFile != null) {
+            setText(virtualFile.getPresentableUrl());
+            setIcon(item.isIncluded() ? Icons.INCLUDED : Icons.EXCLUDED);
+        } else {
+            setText(url);
+            setIcon(AllIcons.Ide.FatalError);
+        }
         if (isSelected) {
             setBackground(list.getSelectionBackground());
             setForeground(list.getSelectionForeground());
