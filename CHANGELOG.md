@@ -8,7 +8,7 @@
 
 ### Fixed
 
-- Fix NPE of workspace with deleted virtual files
+- Fix NPE of workspace with deleted virtual files: marked as RED
 
 ## [0.14.6]
 
