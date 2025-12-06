@@ -4,6 +4,18 @@
 
 ## [Unreleased]
 
+## [0.14.7]
+
+### Fixed
+
+- Fix NPE of workspace with deleted virtual files
+
+## [0.14.6]
+
+### Fixed
+
+- Compatible bugs with IntelliJ IDEA 2025.3
+
 ## [0.14.5]
 
 ### Fixed
