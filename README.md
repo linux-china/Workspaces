@@ -13,7 +13,8 @@ You can bind a name to a set of one or more files and then open/close that set o
 You can create as many workspaces as you want and arrange them in the Workspaces tool window in any order you like.
 
 ### Use cases:
-
+                                                       
+* AI Agent: read group of files and generate code
 * GitHub Copilot: read current file and any files opened in your IDE
 * Domain Driven Design: group entity, repository, service, controller, etc. together
 * Frontend development: group view, components, API service layer, etc. together
