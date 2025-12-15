@@ -1,6 +1,14 @@
 Workspaces plugin
 =================
 
+### Sponsor
+
+Qoder is an agentic coding platform designed for real software development.
+
+<a href="https://plugins.jetbrains.com/plugin/28926-qoder--think-deeper-build-better-" rel="Qoder">![Qoder](./qoder-banner.png)</a>
+
+
+
 Workspaces, a plugin for JetBrains IDEs, enables you to create and manage named groups of files(workspace)  within a
 project. https://plugins.jetbrains.com/plugin/21829-workspaces
 
