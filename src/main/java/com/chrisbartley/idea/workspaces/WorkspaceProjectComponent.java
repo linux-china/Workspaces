@@ -6,7 +6,6 @@ import com.chrisbartley.idea.workspaces.actions.*;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.components.ProjectComponent;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindowManager;
 
@@ -14,6 +13,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * workspaces project component to register actions
+ */
 public class WorkspaceProjectComponent implements Disposable {
     private static final Map<Project, DefaultActionGroup> PROJECT_WORKSPACES_MENUS = new HashMap<>();
     private static final Map<Project, DefaultActionGroup> PROJECT_POPUP_MENUS = new HashMap<>();
