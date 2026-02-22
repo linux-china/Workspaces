@@ -10,6 +10,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
 import java.util.Set;
 
 
@@ -27,7 +28,9 @@ public final class CreateWorkspaceAction
             Set<String> boundFileUrls = workspaceManager.getBoundFileUrls();
             FileEditorManager fileEditorManager = FileEditorManager.getInstance(project);
 
-            CreateWorkspaceDialog dialog = new CreateWorkspaceDialog("Create a New Workspace", "Create", boundFileUrls, VirtualFileUtils.getUrls(fileEditorManager.getOpenFiles()));
+            final List<String> openFiles = VirtualFileUtils.getUrls(fileEditorManager.getOpenFiles());
+            openFiles.removeIf(file -> file.startsWith("mock://"));
+            CreateWorkspaceDialog dialog = new CreateWorkspaceDialog("Create a New Workspace", "Create", boundFileUrls, openFiles);
             dialog.pack();
             dialog.show();
             if (dialog.getExitCode() == 0) {
