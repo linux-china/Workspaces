@@ -42,7 +42,7 @@ public final class Workspace {
 
 
     public void addFileUrl(@NotNull String fileUrl) {
-        if (!fileUrl.isEmpty() && !this.fileUrls.contains(fileUrl)) {
+        if (!fileUrl.isEmpty() && !fileUrl.startsWith("mock://") && !this.fileUrls.contains(fileUrl)) {
             this.fileUrls.add(fileUrl);
         }
     }
