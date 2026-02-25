@@ -4,6 +4,18 @@
 
 ## [Unreleased]
 
+## [0.14.9]
+
+### Added
+
+- Remove virtual files with `mock://` protocol from workspace, such as ToolWindow as editor
+
+## [0.14.8]
+
+### Fixed
+
+- Compatible with JetBrains 2026.1
+
 ## [0.14.7]
 
 ### Fixed
