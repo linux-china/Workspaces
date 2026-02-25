@@ -19,8 +19,17 @@ public class AppendFileToWorkspaceAction extends BaseWorkspaceAction {
     }
 
     @Override
-    public void update(@NotNull AnActionEvent e) {
-        e.getPresentation().setIcon(Icons.WORKSPACES);
+    public void update(@NotNull AnActionEvent event) {
+        event.getPresentation().setIcon(Icons.WORKSPACES);
+        final Project project = event.getProject();
+        if (project != null) {
+            final VirtualFile virtualFile = event.getData(CommonDataKeys.VIRTUAL_FILE);
+            if (virtualFile != null) {
+                if (virtualFile.getUrl().startsWith("mock://")) {
+                    event.getPresentation().setEnabledAndVisible(false);
+                }
+            }
+        }
     }
 
     @Override
