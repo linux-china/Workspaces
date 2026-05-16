@@ -2,13 +2,11 @@ package com.chrisbartley.idea.util;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+import javax.swing.*;
+import java.util.*;
 
 
-public class WrappedListModel<T> extends RefreshableListModel<T> implements List<T> {
+public class WrappedListModel<T> extends RefreshableListModel<T> implements List<T>, ListModel<T> {
     private final List<T> wrappedList;
 
     public WrappedListModel(List<T> wrappedList) {
@@ -41,12 +39,12 @@ public class WrappedListModel<T> extends RefreshableListModel<T> implements List
     }
 
 
-    public Iterator<T> iterator() {
+    public @NotNull Iterator<T> iterator() {
         return this.wrappedList.iterator();
     }
 
 
-    public Object[] toArray() {
+    public Object @NotNull [] toArray() {
         return this.wrappedList.toArray();
     }
 
@@ -77,7 +75,7 @@ public class WrappedListModel<T> extends RefreshableListModel<T> implements List
 
     @Override
     public boolean containsAll(@NotNull Collection<?> c) {
-        return this.wrappedList.containsAll(c);
+        return new HashSet<>(this.wrappedList).containsAll(c);
     }
 
     public boolean addAll(@NotNull Collection c) {
@@ -158,17 +156,17 @@ public class WrappedListModel<T> extends RefreshableListModel<T> implements List
     }
 
 
-    public ListIterator<T> listIterator() {
+    public @NotNull ListIterator<T> listIterator() {
         return this.wrappedList.listIterator();
     }
 
 
-    public ListIterator<T> listIterator(int index) {
+    public @NotNull ListIterator<T> listIterator(int index) {
         return this.wrappedList.listIterator(index);
     }
 
 
-    public List<T> subList(int fromIndex, int toIndex) {
+    public @NotNull List<T> subList(int fromIndex, int toIndex) {
         return this.wrappedList.subList(fromIndex, toIndex);
     }
 
