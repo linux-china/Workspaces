@@ -5,6 +5,7 @@ import com.chrisbartley.idea.workspaces.WorkspaceState;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vfs.VirtualFile;
 import org.jetbrains.annotations.NotNull;
 
 
@@ -19,7 +20,7 @@ public final class ToggleWorkspaceOpennessAction extends BaseWorkspaceAction {
     }
 
     protected String getActionRegistrationId() {
-        return "ToggleWorkspaceOpenClosed." + this.project.getProjectFile().getNameWithoutExtension() + "." + this.workspace.getName();
+        return "ToggleWorkspaceOpenClosed." + this.project.getName() + "." + this.workspace.getName();
     }
 
 
