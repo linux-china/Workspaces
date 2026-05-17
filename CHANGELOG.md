@@ -4,6 +4,13 @@
 
 ## [Unreleased]
 
+## [0.14.10]
+
+### Fixed
+
+- Fix some NPE problems
+
+
 ## [0.14.9]
 
 ### Added
