@@ -9,7 +9,7 @@ import javax.swing.*;
 
 public final class CloseAllWorkspacesAction extends BaseWorkspaceAction {
     public CloseAllWorkspacesAction() {
-        super("Close All Workspaces", "Close all workspaces", (Icon) null);
+        super("Close All Workspaces", "Close all workspaces", null);
     }
 
 

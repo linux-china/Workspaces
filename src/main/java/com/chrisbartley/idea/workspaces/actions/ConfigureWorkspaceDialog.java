@@ -12,6 +12,7 @@ import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.ActionToolbar;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.ui.DialogWrapper;
+import com.intellij.ui.components.JBList;
 import com.intellij.ui.components.JBScrollPane;
 import org.jetbrains.annotations.NotNull;
 
@@ -49,7 +50,7 @@ final class ConfigureWorkspaceDialog extends DialogWrapper {
 
 
     protected JComponent createCenterPanel() {
-        JList<IncludableItem<String>> fileList = new JList<>(this.listModel);
+        JList<IncludableItem<String>> fileList = new JBList<>((ListModel<IncludableItem<String>>) this.listModel);
         fileList.setSelectionMode(2);
         fileList.setCellRenderer(new ConfigureWorkspaceFileListCellRenderer());
         JScrollPane scrollPane = new JBScrollPane(fileList);
@@ -71,6 +72,7 @@ final class ConfigureWorkspaceDialog extends DialogWrapper {
         toolbarGroup.add(new MoveUpAction(fileList));
         toolbarGroup.add(new MoveDownAction(fileList));
         ActionToolbar toolbar = ActionManager.getInstance().createActionToolbar("CONFIGURE_WORKSPACE_DIALOG", toolbarGroup, true);
+        toolbar.setTargetComponent(fileList);
         toolbar.getComponent().setAlignmentX(0.0F);
         topPane.add(toolbar.getComponent());
 

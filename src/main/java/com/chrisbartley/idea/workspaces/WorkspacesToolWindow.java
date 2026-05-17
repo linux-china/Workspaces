@@ -32,6 +32,7 @@ final class WorkspacesToolWindow extends JPanel {
         toolbarGroup.add(new MoveDownAction(jList));
         toolbarGroup.add(configureWorkspaceAction);
         ActionToolbar toolbar = ActionManager.getInstance().createActionToolbar("WORKSPACES_TOOL_WINDOW", toolbarGroup, true);
+        toolbar.setTargetComponent(jList);
 
 
         DefaultActionGroup popupActionGroup = new DefaultActionGroup("WorkspacesPopup", true);

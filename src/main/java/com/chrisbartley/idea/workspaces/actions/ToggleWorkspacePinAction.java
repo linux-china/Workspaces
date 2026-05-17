@@ -15,12 +15,12 @@ public final class ToggleWorkspacePinAction extends BaseWorkspaceAction {
     private final Workspace workspace;
 
     public ToggleWorkspacePinAction(Workspace workspace) {
-        this(workspace.getName(), "Pin/unpin '" + workspace.getName() + "'", (Icon) null, null, workspace);
+        this(workspace.getName(), "Pin/unpin '" + workspace.getName() + "'", null, null, workspace);
     }
 
 
     public ToggleWorkspacePinAction(JList<Workspace> list) {
-        this("Toggle Pin", "Pin/unpin the selected workspace(s)", Icons.PINNED, list, (Workspace) null);
+        this("Toggle Pin", "Pin/unpin the selected workspace(s)", Icons.PINNED, list, null);
     }
 
 

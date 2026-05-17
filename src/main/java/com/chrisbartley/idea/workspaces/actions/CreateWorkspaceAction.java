@@ -46,26 +46,20 @@ public final class CreateWorkspaceAction
         if (project != null) {
             String text, description;
             VirtualFile[] openFiles = FileEditorManager.getInstance(project).getOpenFiles();
-            switch (openFiles.length) {
-
-
-                case 0:
+            description = switch (openFiles.length) {
+                case 0 -> {
                     text = "Create New from Open File(s)...";
-                    description = "Create a new workspace from some or all of the currently open files";
-                    break;
-
-
-                case 1:
+                    yield "Create a new workspace from some or all of the currently open files";
+                }
+                case 1 -> {
                     text = "Create New from Open File...";
-                    description = "Create a new workspace from the currently open file";
-                    break;
-
-
-                default:
+                    yield "Create a new workspace from the currently open file";
+                }
+                default -> {
                     text = "Create New from Open Files...";
-                    description = "Create a new workspace from some or all of the currently open files";
-                    break;
-            }
+                    yield "Create a new workspace from some or all of the currently open files";
+                }
+            };
 
             presentation.setText(text);
             presentation.setDescription(description);

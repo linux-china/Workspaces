@@ -6,15 +6,14 @@ import com.chrisbartley.idea.util.IncludableItem;
 import com.chrisbartley.idea.util.ReorderableListModel;
 import com.chrisbartley.idea.util.WrappedListModel;
 import com.chrisbartley.swing.event.ButtonTogglingDocumentListener;
-import com.chrisbartley.swing.event.DocumentEventValidator;
 import com.chrisbartley.swing.event.NonEmptyDocumentValidator;
-import com.intellij.openapi.actionSystem.ActionGroup;
 import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.ActionToolbar;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
+import com.intellij.ui.components.JBList;
 import com.intellij.ui.components.JBScrollPane;
 import org.jetbrains.annotations.NotNull;
 
@@ -71,12 +70,12 @@ final class CreateWorkspaceDialog extends DialogWrapper {
 
 
     protected JComponent createCenterPanel() {
-        JList fileList = new JList(this.listModel);
+        JBList<IncludableItem<String>> fileList = new JBList<>((ListModel<IncludableItem<String>>) this.listModel);
         fileList.setSelectionMode(2);
         fileList.setCellRenderer(new ConfigureWorkspaceFileListCellRenderer());
         JScrollPane scrollPane = new JBScrollPane(fileList);
         this.workspaceNameTextField.addActionListener(e -> CreateWorkspaceDialog.this.doOKAction());
-        this.workspaceNameTextField.getDocument().addDocumentListener(new ButtonTogglingDocumentListener(getOKAction(), (DocumentEventValidator) NON_EMPTY_DOCUMENT_VALIDATOR));
+        this.workspaceNameTextField.getDocument().addDocumentListener(new ButtonTogglingDocumentListener(getOKAction(), NON_EMPTY_DOCUMENT_VALIDATOR));
         this.workspaceNameTextField.setAlignmentX(0.0F);
 
         JPanel topPane = new JPanel();
@@ -91,7 +90,8 @@ final class CreateWorkspaceDialog extends DialogWrapper {
         toolbarGroup.add(new ExcludeWorkspacedAction(this.boundFileUrls, (WrappedListModel<IncludableItem<String>>) fileList.getModel()));
         toolbarGroup.add(new MoveUpAction(fileList));
         toolbarGroup.add(new MoveDownAction(fileList));
-        ActionToolbar toolbar = ActionManager.getInstance().createActionToolbar("CREATE_WORKSPACE_DIALOG", (ActionGroup) toolbarGroup, true);
+        ActionToolbar toolbar = ActionManager.getInstance().createActionToolbar("CREATE_WORKSPACE_DIALOG", toolbarGroup, true);
+        toolbar.setTargetComponent(fileList);
         toolbar.getComponent().setAlignmentX(0.0F);
         topPane.add(toolbar.getComponent());
 

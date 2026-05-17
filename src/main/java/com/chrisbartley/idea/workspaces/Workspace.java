@@ -135,11 +135,9 @@ public final class Workspace {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Workspace)) {
+        if (!(o instanceof Workspace workspace)) {
             return false;
         }
-
-        Workspace workspace = (Workspace) o;
 
         if (this.isPinned != workspace.isPinned) {
             return false;
@@ -147,11 +145,7 @@ public final class Workspace {
         if (!Objects.equals(this.fileUrls, workspace.fileUrls)) {
             return false;
         }
-        if (!Objects.equals(this.name, workspace.name)) {
-            return false;
-        }
-
-        return true;
+        return Objects.equals(this.name, workspace.name);
     }
 
 

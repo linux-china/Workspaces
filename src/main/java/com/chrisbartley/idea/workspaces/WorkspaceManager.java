@@ -8,6 +8,7 @@ import com.intellij.openapi.components.Service;
 import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.ui.components.JBList;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
@@ -15,12 +16,13 @@ import java.util.*;
 @Service(Service.Level.PROJECT)
 public final class WorkspaceManager {
     private final WorkspacesConfiguration workspacesConfiguration;
+    @NotNull
     private final Project project;
     private final ReorderableListModel<Workspace> workspacesModel;
     private final List<RegisterableAction> toggleWorkspaceOpennessActions = new ArrayList<>();
 
 
-    public WorkspaceManager(Project project) {
+    public WorkspaceManager(@NotNull Project project) {
         this.project = project;
         this.workspacesModel = project.getService(WorkspaceStateService.class).getWorkspacesModel();
         this.workspacesConfiguration = ApplicationManager.getApplication().getService(WorkspacesConfiguration.class);
@@ -123,14 +125,14 @@ public final class WorkspaceManager {
                 }
                 if (sizeOfNewSelectedIndicesArray > 0) {
 
-                    int[] newSelectedIndeces = new int[sizeOfNewSelectedIndicesArray];
+                    int[] newSelectedIndexes = new int[sizeOfNewSelectedIndicesArray];
                     int currentPos = 0;
                     for (int selectedIndex : selectedIndices) {
                         if (selectedIndex != -1) {
-                            newSelectedIndeces[currentPos++] = selectedIndex;
+                            newSelectedIndexes[currentPos++] = selectedIndex;
                         }
                     }
-                    workspaceList.setSelectedIndices(newSelectedIndeces);
+                    workspaceList.setSelectedIndices(newSelectedIndexes);
                 }
             }
         }
@@ -289,7 +291,7 @@ public final class WorkspaceManager {
     public void closeAllButTheseWorkspaces(List<Workspace> workspacesNotToClose) {
         Set<Workspace> workspacesToBeClosed = new HashSet<>(this.workspacesModel);
         if (workspacesNotToClose != null) {
-            workspacesToBeClosed.removeAll(workspacesNotToClose);
+            workspacesNotToClose.forEach(workspacesToBeClosed::remove);
         }
         closeWorkspaces(workspacesToBeClosed);
     }
