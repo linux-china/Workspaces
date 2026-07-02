@@ -3,6 +3,7 @@ package com.chrisbartley.idea.workspaces.actions;
 import com.chrisbartley.idea.util.VirtualFileUtils;
 import com.chrisbartley.idea.workspaces.Icons;
 import com.chrisbartley.idea.workspaces.Workspace;
+import com.intellij.openapi.actionSystem.ActionUpdateThread;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.project.Project;
@@ -12,6 +13,11 @@ import org.jetbrains.annotations.NotNull;
 
 public class AppendFileToWorkspaceAction extends BaseWorkspaceAction {
     private final Workspace workspace;
+
+    @Override
+    public @NotNull ActionUpdateThread getActionUpdateThread() {
+        return ActionUpdateThread.BGT;
+    }
 
     public AppendFileToWorkspaceAction(Workspace workspace) {
         super(workspace.name, "Append file to workspace", Icons.WORKSPACES);
