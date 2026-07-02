@@ -4,12 +4,17 @@
 
 ## [Unreleased]
 
+## [0.14.12]
+
+### Fixed
+
+- Fix EDT problem for AppendFileToWorkspaceAction
+
 ## [0.14.10]
 
 ### Fixed
 
 - Fix some NPE problems
-
 
 ## [0.14.9]
 
